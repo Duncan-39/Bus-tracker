@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Bus Arrivals</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1><a href="#" id="home">Bus Arrivals</a></h1>
+    <div class="search">
+      <input id="search" type="search" placeholder="Loading stops…" disabled
+             autocomplete="off" spellcheck="false"
+             role="combobox" aria-expanded="false" aria-controls="results"
+             aria-autocomplete="list" aria-label="Search bus stop by code, name or road">
+      <ul id="results" role="listbox" hidden></ul>
+    </div>
+    <div id="favourites" class="chips" aria-label="Favourite stops"></div>
+  </header>
+
+  <main>
+    <p id="stops-error" class="banner error" role="alert" hidden>
+      Couldn't load the bus stop list.
+      <button type="button" id="stops-retry">Retry</button>
+    </p>
+
+    <p id="welcome" class="hint">Search for a bus stop by code, name or road to see arrival times.</p>
+
+    <section id="stop" hidden>
+      <div class="stop-head">
+        <div class="stop-title">
+          <h2 id="stop-name"></h2>
+          <p id="stop-meta"></p>
+        </div>
+        <button type="button" id="fav" class="icon-btn" aria-pressed="false" title="Add to favourites">☆</button>
+      </div>
+
+      <div class="status">
+        <span id="updated">&nbsp;</span>
+        <button type="button" id="refresh" class="icon-btn" title="Refresh now" aria-label="Refresh now">↻</button>
+      </div>
+      <p id="warning" class="banner warn" role="status" hidden>Couldn't refresh — showing the last data.</p>
+
+      <div id="services" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
