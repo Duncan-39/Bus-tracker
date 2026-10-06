@@ -8,45 +8,72 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top">
-    <h1><a href="#" id="home">Bus Arrivals</a></h1>
-    <div class="search">
-      <input id="search" type="search" placeholder="Loading stops…" disabled
-             autocomplete="off" spellcheck="false"
-             role="combobox" aria-expanded="false" aria-controls="results"
-             aria-autocomplete="list" aria-label="Search bus stop by code, name or road">
-      <ul id="results" role="listbox" hidden></ul>
-    </div>
-    <div id="favourites" class="chips" aria-label="Favourite stops"></div>
-  </header>
-
-  <main>
-    <p id="stops-error" class="banner error" role="alert" hidden>
-      Couldn't load the bus stop list.
-      <button type="button" id="stops-retry">Retry</button>
-    </p>
-
-    <p id="welcome" class="hint">Search for a bus stop by code, name or road to see arrival times.</p>
-
-    <section id="stop" hidden>
-      <div class="stop-head">
-        <div class="stop-title">
-          <h2 id="stop-name"></h2>
-          <p id="stop-meta"></p>
+  <div class="layout">
+    <div class="bus-col">
+      <header class="top">
+        <h1><a href="#" id="home">Bus Arrivals</a></h1>
+        <div class="search">
+          <input id="search" type="search" placeholder="Loading stops…" disabled
+                 autocomplete="off" spellcheck="false"
+                 role="combobox" aria-expanded="false" aria-controls="results"
+                 aria-autocomplete="list" aria-label="Search bus stop by code, name or road">
+          <ul id="results" role="listbox" hidden></ul>
         </div>
-        <button type="button" id="fav" class="icon-btn" aria-pressed="false" title="Add to favourites">☆</button>
-      </div>
+        <div id="favourites" class="chips" aria-label="Favourite stops"></div>
+      </header>
 
-      <div class="status">
-        <span id="updated">&nbsp;</span>
-        <button type="button" id="refresh" class="icon-btn" title="Refresh now" aria-label="Refresh now">↻</button>
-      </div>
-      <p id="warning" class="banner warn" role="status" hidden>Couldn't refresh — showing the last data.</p>
+      <main>
+        <p id="stops-error" class="banner error" role="alert" hidden>
+          Couldn't load the bus stop list.
+          <button type="button" id="stops-retry">Retry</button>
+        </p>
 
-      <div id="services" aria-live="polite"></div>
-    </section>
-  </main>
+        <p id="welcome" class="hint">Search for a bus stop by code, name or road to see arrival times.</p>
+
+        <section id="stop" hidden>
+          <div class="stop-head">
+            <div class="stop-title">
+              <h2 id="stop-name"></h2>
+              <p id="stop-meta"></p>
+            </div>
+            <button type="button" id="fav" class="icon-btn" aria-pressed="false" title="Add to favourites">☆</button>
+          </div>
+
+          <div class="status">
+            <span id="updated">&nbsp;</span>
+            <button type="button" id="refresh" class="icon-btn" title="Refresh now" aria-label="Refresh now">↻</button>
+          </div>
+          <p id="warning" class="banner warn" role="status" hidden>Couldn't refresh — showing the last data.</p>
+
+          <div id="services" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <aside id="psi-panel" class="psi" aria-labelledby="psi-title">
+      <h2 id="psi-title">PSI by region (24-hour)</h2>
+      <p id="psi-asof" class="psi-asof">&nbsp;</p>
+      <p id="psi-stale" class="psi-stale" hidden>Data may be delayed</p>
+      <p id="psi-warning" class="banner warn" role="status" hidden>Couldn't refresh — showing the last data.</p>
+      <p id="psi-error" class="banner error" role="alert" hidden>Couldn't load PSI data.</p>
+      <table class="psi-table">
+        <thead>
+          <tr>
+            <th scope="col">Region</th>
+            <th scope="col">PSI</th>
+            <th scope="col">PM2.5 <small>µg/m³</small></th>
+            <th scope="col">PM10 <small>µg/m³</small></th>
+          </tr>
+        </thead>
+        <tbody id="psi-body">
+          <tr><td colspan="4" class="psi-msg">Loading…</td></tr>
+        </tbody>
+      </table>
+      <p class="psi-note">24-hour PSI readings from data.gov.sg. Units follow NEA convention; the data source does not state them.</p>
+    </aside>
+  </div>
 
   <script src="app.js"></script>
+  <script src="psi.js"></script>
 </body>
 </html>

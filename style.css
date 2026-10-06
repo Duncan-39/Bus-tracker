@@ -10,6 +10,8 @@
   --bad: #d13b3b;
   --warn-bg: #fff4d6;
   --err-bg: #fde4e4;
+  --vbad: #b3261e;
+  --haz: #7a1f5c;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -24,6 +26,8 @@
     --bad: #f06a6a;
     --warn-bg: #3a3014;
     --err-bg: #40191b;
+    --vbad: #ff7b6e;
+    --haz: #d98ad0;
   }
 }
 
@@ -34,7 +38,7 @@ body {
   background: var(--bg);
   color: var(--text);
 }
-.top, main { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+.layout { max-width: 640px; margin: 0 auto; padding: 0 16px; }
 .top { padding-top: 16px; }
 h1 { font-size: 1.25rem; margin: 0 0 12px; }
 h1 a { color: inherit; text-decoration: none; }
@@ -135,3 +139,35 @@ main { padding-bottom: 32px; }
 .empty { color: var(--muted); padding: 24px 0; text-align: center; }
 
 [hidden] { display: none !important; }
+
+/* PSI panel */
+.psi { margin: 8px 0 32px; }
+.psi-asof { margin: 4px 0 0; color: var(--muted); font-size: .85rem; }
+.psi-stale { margin: 2px 0 0; color: var(--muted); font-size: .8rem; font-style: italic; }
+.psi-table { width: 100%; margin-top: 12px; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: .9rem; }
+.psi-table th, .psi-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+.psi-table tbody tr:last-child > * { border-bottom: 0; }
+.psi-table thead th { font-size: .75rem; color: var(--muted); font-weight: 600; vertical-align: bottom; }
+.psi-table thead small { display: block; font-weight: 400; }
+.psi-table tbody th { font-weight: 600; }
+.psi-table td { font-variant-numeric: tabular-nums; }
+.psi-band { margin-left: 2px; font-size: .75rem; color: var(--muted); }
+.psi-msg { color: var(--muted); text-align: center !important; }
+.psi-note { color: var(--muted); font-size: .75rem; margin: 8px 0 0; }
+.dot.psi-good { background: var(--good); }
+.dot.psi-moderate { background: var(--mid); }
+.dot.psi-unhealthy { background: var(--bad); }
+.dot.psi-very-unhealthy { background: var(--vbad); }
+.dot.psi-hazardous { background: var(--haz); }
+
+@media (min-width: 900px) {
+  .layout {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 340px minmax(0, 640px);
+    column-gap: 32px;
+    align-items: start;
+  }
+  .psi { grid-column: 1; grid-row: 1; margin-top: 16px; }
+  .bus-col { grid-column: 2; grid-row: 1; }
+}
