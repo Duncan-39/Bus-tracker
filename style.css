@@ -116,6 +116,7 @@ main { padding-bottom: 32px; }
   border: 1px solid var(--line);
   border-radius: 12px;
 }
+.route { grid-column: 1 / -1; padding-top: 8px; border-top: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
 .bus-no { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
 .arrival .mins { font-size: 1.35rem; font-weight: 700; }
 .arrival .mins small { font-size: .8rem; font-weight: 500; color: var(--muted); }

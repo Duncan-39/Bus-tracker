@@ -285,6 +285,17 @@ function arrivalCell(arrival, now) {
   return cell;
 }
 
+function stopLabel(code) {
+  const stop = state.byCode.get(String(code));
+  return stop ? stop.name : String(code);
+}
+
+// "Origin → Destination" taken from the first arrival that carries both codes.
+function routeText(svc) {
+  const a = [svc.next, svc.next2].find((x) => x && x.origin_code && x.destination_code);
+  return a ? `${stopLabel(a.origin_code)} → ${stopLabel(a.destination_code)}` : "";
+}
+
 function renderServices() {
   const box = els.services;
   box.replaceChildren();
@@ -304,15 +315,16 @@ function renderServices() {
   }
   const now = Date.now();
   for (const svc of sortServices(state.services)) {
-    box.append(
-      el(
-        "div",
-        { class: "service" },
-        el("div", { class: "bus-no", text: svc.no }),
-        arrivalCell(svc.next, now),
-        arrivalCell(svc.next2, now)
-      )
+    const card = el(
+      "div",
+      { class: "service" },
+      el("div", { class: "bus-no", text: svc.no }),
+      arrivalCell(svc.next, now),
+      arrivalCell(svc.next2, now)
     );
+    const route = routeText(svc);
+    if (route) card.append(el("div", { class: "route", text: route }));
+    box.append(card);
   }
 }
 
